@@ -171,12 +171,13 @@ function renderFrame(frameIndex) {
 
     let drawWidth, drawHeight, drawX, drawY;
 
+    // CONTAIN LOGIC (El texto y producto serán totalmente visibles)
     if (imgAspect > canvasAspect) {
-        drawHeight = canvasRect.height * scale;
-        drawWidth = drawHeight * imgAspect;
-    } else {
         drawWidth = canvasRect.width * scale;
         drawHeight = drawWidth / imgAspect;
+    } else {
+        drawHeight = canvasRect.height * scale;
+        drawWidth = drawHeight * imgAspect;
     }
 
     drawX = (canvasRect.width - drawWidth) / 2;
@@ -460,6 +461,45 @@ function handleResize() {
 }
 
 // ===========================================
+// MOBILE MENU
+// ===========================================
+
+function setupMobileMenu() {
+    const toggle = document.querySelector('.mobile-menu-toggle');
+    const overlay = document.querySelector('.mobile-menu-overlay');
+    const links = document.querySelectorAll('.mobile-nav-link');
+
+    if (!toggle || !overlay) return;
+
+    const toggleMenu = () => {
+        const isActive = toggle.classList.contains('active');
+        
+        if (isActive) {
+            toggle.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            if (lenis) lenis.start();
+        } else {
+            toggle.classList.add('active');
+            overlay.classList.add('active');
+            toggle.setAttribute('aria-expanded', 'true');
+            if (lenis) lenis.stop();
+        }
+    };
+
+    toggle.addEventListener('click', toggleMenu);
+
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            toggle.classList.remove('active');
+            overlay.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            if (lenis) lenis.start();
+        });
+    });
+}
+
+// ===========================================
 // INICIALIZACIÓN
 // ===========================================
 
@@ -480,6 +520,7 @@ async function init() {
     setupSectionAnimations();
     setupCounters();
     setupMarquee();
+    setupMobileMenu();
 
     // Animación inicial del hero
     animateHero();
