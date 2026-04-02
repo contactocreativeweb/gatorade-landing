@@ -1,0 +1,13 @@
+# Video original (pesado)
+gatorade_video.mp4
+
+# Documentación de referencia
+scroll-web.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/

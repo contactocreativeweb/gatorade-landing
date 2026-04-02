@@ -1,0 +1,620 @@
+/* ===========================================
+   GATORADE PREMIUM LANDING PAGE
+   =========================================== */
+
+:root {
+    /* Colores Gatorade */
+    --gatorade-orange: #FF5000;
+    --gatorade-orange-light: #FF6B2C;
+    --gatorade-orange-dark: #E64500;
+    --gatorade-yellow: #FFD500;
+    --bg-black: #000000;
+    --bg-dark: #0a0a0a;
+    --text-white: #FFFFFF;
+    --text-gray: #B0B0B0;
+    --overlay-dark: rgba(0, 0, 0, 0.90);
+
+    /* Tipografía */
+    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Reset y base */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: auto;
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-black);
+    color: var(--text-white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===========================================
+   LOADER
+   =========================================== */
+
+#loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-black);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.loader-logo {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 0.5em;
+    color: var(--gatorade-orange);
+    margin-bottom: 2rem;
+}
+
+.loader-bar {
+    width: 300px;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0 auto 1rem;
+    overflow: hidden;
+    border-radius: 2px;
+}
+
+.loader-progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--gatorade-orange), var(--gatorade-yellow));
+    transition: width 0.3s ease;
+}
+
+.loader-percent {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-gray);
+    letter-spacing: 0.2em;
+}
+
+/* ===========================================
+   HEADER
+   =========================================== */
+
+#header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 1.5rem 5vw;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 0.3em;
+    color: var(--gatorade-orange);
+}
+
+.nav-links {
+    display: flex;
+    gap: 3rem;
+}
+
+.nav-link {
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--gatorade-orange);
+}
+
+/* ===========================================
+   HERO
+   =========================================== */
+
+#hero {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: var(--bg-black);
+    z-index: 100;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+}
+
+.hero-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    color: var(--gatorade-orange);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.hero-title {
+    font-size: clamp(4rem, 12rem, 12rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.hero-title .highlight {
+    color: var(--gatorade-orange);
+}
+
+.hero-subtitle {
+    font-size: 1.25rem;
+    font-weight: 300;
+    color: var(--text-gray);
+    max-width: 500px;
+    line-height: 1.6;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.hero-scroll {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-gray);
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+}
+
+.scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gatorade-orange), transparent);
+    animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+/* Alineación lateral */
+.align-left {
+    padding-left: 5vw;
+    padding-right: 55vw;
+}
+
+.align-right {
+    padding-left: 55vw;
+    padding-right: 5vw;
+}
+
+/* ===========================================
+   CANVAS
+   =========================================== */
+
+.canvas-wrap {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--bg-black);
+    z-index: 1;
+}
+
+#product-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: circle(0% at 50% 50%);
+}
+
+/* ===========================================
+   OVERLAY OSCURO
+   =========================================== */
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-dark);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* ===========================================
+   SCROLL CONTAINER
+   =========================================== */
+
+#scroll-container {
+    position: relative;
+    height: 800vh;
+    z-index: 10;
+}
+
+/* ===========================================
+   SECCIONES DE CONTENIDO
+   =========================================== */
+
+.content-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    pointer-events: none;
+}
+
+.section-content {
+    position: relative;
+    z-index: 20;
+    pointer-events: auto;
+}
+
+.section-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    color: var(--gatorade-orange);
+    margin-bottom: 1rem;
+}
+
+.section-title {
+    font-size: clamp(3rem, 5rem, 6rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+}
+
+.section-text {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: var(--text-gray);
+    line-height: 1.7;
+    max-width: 450px;
+}
+
+/* ===========================================
+   MARQUEE HORIZONTAL
+   =========================================== */
+
+.marquee-wrap {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 15;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.marquee-text {
+    font-size: 10vw;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255, 80, 0, 0.3);
+    white-space: nowrap;
+    transform: translateX(0);
+}
+
+/* ===========================================
+   ESTADÍSTICAS
+   =========================================== */
+
+.stats-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stats-overlay {
+    display: flex;
+    justify-content: center;
+    gap: 8vw;
+    text-align: center;
+    z-index: 20;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-number {
+    font-size: clamp(4rem, 8rem, 10rem);
+    font-weight: 900;
+    line-height: 1;
+    color: var(--gatorade-orange);
+}
+
+.stat-unit {
+    font-size: clamp(2rem, 4rem, 5rem);
+    font-weight: 700;
+    color: var(--gatorade-orange);
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--text-gray);
+    margin-top: 1rem;
+    text-transform: uppercase;
+}
+
+/* ===========================================
+   INGREDIENTES
+   =========================================== */
+
+.ingredients-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.ingredient {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.ingredient-icon {
+    font-size: 1.5rem;
+}
+
+.ingredient-name {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-white);
+}
+
+/* ===========================================
+   CTA FINAL
+   =========================================== */
+
+.cta-section {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--bg-black);
+}
+
+.cta-content {
+    text-align: center;
+    z-index: 20;
+}
+
+.cta-title {
+    font-size: clamp(2.5rem, 5rem, 6rem);
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.cta-text {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--text-gray);
+    margin-bottom: 2.5rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, var(--gatorade-orange), var(--gatorade-orange-dark));
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    border-radius: 50px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(255, 80, 0, 0.4);
+}
+
+.btn-secondary {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: transparent;
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    transition: border-color 0.3s ease;
+}
+
+.btn-secondary:hover {
+    border-color: var(--gatorade-orange);
+}
+
+/* ===========================================
+   ANIMACIONES
+   =========================================== */
+
+[data-animation] {
+    opacity: 0;
+}
+
+/* Fade up */
+.fade-up {
+    transform: translateY(50px);
+}
+
+/* Slide left */
+.slide-left {
+    transform: translateX(-80px);
+}
+
+/* Slide right */
+.slide-right {
+    transform: translateX(80px);
+}
+
+/* Scale up */
+.scale-up {
+    transform: scale(0.85);
+}
+
+/* Rotate in */
+.rotate-in {
+    transform: translateY(40px) rotate(3deg);
+}
+
+/* ===========================================
+   RESPONSIVE
+   =========================================== */
+
+@media (max-width: 768px) {
+    :root {
+        --scroll-height: 550vh;
+    }
+
+    #header {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: clamp(2.5rem, 8rem, 8rem);
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .align-left,
+    .align-right {
+        padding: 0 1.5rem;
+        text-align: center;
+    }
+
+    .section-title {
+        font-size: clamp(2rem, 3rem, 4rem);
+    }
+
+    .section-text {
+        font-size: 1rem;
+    }
+
+    .stats-overlay {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .stat-number {
+        font-size: 4rem;
+    }
+
+    .marquee-text {
+        font-size: 12vw;
+    }
+
+    .cta-title {
+        font-size: clamp(2rem, 3rem, 4rem);
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #scroll-container {
+        height: 550vh;
+    }
+
+    /* Overlays oscuros en móvil para legibilidad */
+    .content-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.7), transparent);
+        z-index: 1;
+    }
+}
+
+/* ===========================================
+   UTILIDADES
+   =========================================== */
+
+.visible {
+    opacity: 1 !important;
+    transform: none !important;
+}
