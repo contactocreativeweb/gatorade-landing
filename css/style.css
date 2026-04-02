@@ -66,15 +66,16 @@ body {
 }
 
 .loader-logo {
-    font-size: 3rem;
+    font-size: clamp(2rem, 8vw, 3rem);
     font-weight: 900;
-    letter-spacing: 0.5em;
+    letter-spacing: clamp(0.2em, 2vw, 0.5em);
     color: var(--gatorade-orange);
     margin-bottom: 2rem;
 }
 
 .loader-bar {
-    width: 300px;
+    width: 80vw;
+    max-width: 300px;
     height: 2px;
     background-color: rgba(255, 255, 255, 0.1);
     margin: 0 auto 1rem;
